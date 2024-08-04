@@ -29,7 +29,12 @@ const login = (async (req, res) => {
         if ((!isMatch) && (!userFound)) return res.status(400).json({ message: 'Contraseña Incorrecta' })
 
         const token = await createToken({ id: userFound._id })
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            sameSite: 'Lax', // or 'Strict' or 'None'
+            secure: true,    // Required if SameSite is 'None'
+            httpOnly: true
+
+        })
         res.json(userFound)
 
     } catch (error) {
@@ -63,7 +68,12 @@ const register = (async (req, res) => {
         });
         await newUser.save()
         const token = await createToken({ id: newUser._id })
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            sameSite: 'Lax', // or 'Strict' or 'None'
+            secure: true,    // Required if SameSite is 'None'
+            httpOnly: true
+
+        })
         res.json(newUser)
 
     } catch (error) {
@@ -86,7 +96,12 @@ const logout = (async (req, res) => {
     try {
 
         console.log(req.cookies)
-        res.cookie("token", "")
+        res.cookie("token", token, {
+            sameSite: 'Lax', // or 'Strict' or 'None'
+            secure: true,    // Required if SameSite is 'None'
+            httpOnly: true
+
+        })
         res.status(200).json({ message: "Cierre de sesión realizado con éxito" })
 
     } catch (error) {
