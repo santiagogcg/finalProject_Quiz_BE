@@ -30,7 +30,7 @@ const login = (async (req, res) => {
 
         const token = await createToken({ id: userFound._id })
         res.cookie("token", token, {
-            sameSite: 'Lax', // or 'Strict' or 'None'
+            sameSite: 'None', // or 'Strict' or 'None'
             secure: true,    // Required if SameSite is 'None'
             httpOnly: true
 
@@ -69,7 +69,7 @@ const register = (async (req, res) => {
         await newUser.save()
         const token = await createToken({ id: newUser._id })
         res.cookie("token", token, {
-            sameSite: 'Lax', // or 'Strict' or 'None'
+            sameSite: 'None', // or 'Strict' or 'None'
             secure: true,    // Required if SameSite is 'None'
             httpOnly: true
 
@@ -97,7 +97,7 @@ const logout = (async (req, res) => {
 
         console.log(req.cookies)
         res.cookie("token", token, {
-            sameSite: 'Lax', // or 'Strict' or 'None'
+            sameSite: 'None', // or 'Strict' or 'None'
             secure: true,    // Required if SameSite is 'None'
             httpOnly: true
 
