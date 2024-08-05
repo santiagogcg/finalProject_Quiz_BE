@@ -32,7 +32,7 @@ const login = (async (req, res) => {
         res.cookie("token", token, {
             sameSite: 'None', // or 'Strict' or 'None'
             secure: false,    // Required if SameSite is 'None'
-            httpOnly: true
+            httpOnly: false
 
         })
         res.json(userFound)
