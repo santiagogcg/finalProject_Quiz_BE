@@ -20,7 +20,7 @@ router.get("/api/profileAdmin", validateToken, profileAdmin)
 
 router.get("/api/verifyToken", validateToken, verifyToken)
 
-router.get("/api/verifyToken", validateToken, verifyToken)
+
 
 
 

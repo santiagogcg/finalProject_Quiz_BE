@@ -31,7 +31,7 @@ const login = (async (req, res) => {
         const token = await createToken({ id: userFound._id })
         res.cookie("token", token, {
             sameSite: 'None', // or 'Strict' or 'None'
-            secure: true,    // Required if SameSite is 'None'
+            secure: false,    // Required if SameSite is 'None'
             httpOnly: true
 
         })

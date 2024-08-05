@@ -1,3 +1,4 @@
+
 const jwt = require("jsonwebtoken")
 require('dotenv').config({ path: './src/.env' })
 
@@ -7,8 +8,9 @@ const validateToken = ((req, res, next) => {
 
 
 
-    const { token } = req.cookies;
+    const { token } = req.cookies
     console.log(req.cookies)
+    console.log(token)
     if (!token) { res.status(401).json({ message: "Token no encontrado.Autorización denegada" }); }
 
     else {
