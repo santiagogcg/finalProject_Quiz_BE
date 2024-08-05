@@ -15,7 +15,7 @@ const app = express()
 
 app.use(cors({
     origin:
-        // ' http://localhost:5173',
+        // 'http://localhost:5173',
 
         "https://finalproject-quiz-fe.onrender.com",
     credentials: true
@@ -24,10 +24,10 @@ app.use(cors({
 
 app.use(bodyParser.json());
 app.use(session({
-    secret: `${process.env.session_secret}`,      // Change this to a random string
+    secret: 'prueba',      // Change this to a random string
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true } // Set to true if using https
+    cookie: { secure: false } // Set to true if using https
 }));
 
 
