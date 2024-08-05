@@ -2,6 +2,9 @@
 const express = require('express')
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
+const session = require("express-session")
+const bodyParser = require("body-parser")
+require('dotenv').config({ path: '/.env' })
 
 // import authRoutes from "./routes/auth.routes.js"
 
@@ -11,10 +14,23 @@ const { routerProps } = require("./routes/prop.routes.js")
 const app = express()
 
 app.use(cors({
-    origin: "https://finalproject-quiz-fe.onrender.com",
+    origin:
+        // ' http://localhost:5173',
+
+        "https://finalproject-quiz-fe.onrender.com",
     credentials: true
 
 }))
+
+app.use(bodyParser.json());
+app.use(session({
+    secret: `${process.env.session_secret}`,      // Change this to a random string
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true } // Set to true if using https
+}));
+
+
 app.use(express.json())
 app.use(cookieParser())
 

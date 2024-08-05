@@ -29,12 +29,13 @@ const login = (async (req, res) => {
         if ((!isMatch) && (!userFound)) return res.status(400).json({ message: 'Contraseña Incorrecta' })
 
         const token = await createToken({ id: userFound._id })
-        res.cookie("token", token, {
-            sameSite: 'None', // or 'Strict' or 'None'
-            secure: false,    // Required if SameSite is 'None'
-            httpOnly: false
+        // res.cookie("token", token, {
+        //     sameSite: 'None', // or 'Strict' or 'None'
+        //     secure: false,    // Required if SameSite is 'None'
+        //     httpOnly: false
 
-        })
+        // })
+        req.session.token = token
         res.json(userFound)
 
     } catch (error) {
@@ -68,12 +69,13 @@ const register = (async (req, res) => {
         });
         await newUser.save()
         const token = await createToken({ id: newUser._id })
-        res.cookie("token", token, {
-            sameSite: 'None', // or 'Strict' or 'None'
-            secure: true,    // Required if SameSite is 'None'
-            httpOnly: true
+        // res.cookie("token", token, {
+        //     sameSite: 'None', // or 'Strict' or 'None'
+        //     secure: true,    // Required if SameSite is 'None'
+        //     httpOnly: true
 
-        })
+        // })
+        req.session.token = token
         res.json(newUser)
 
     } catch (error) {
@@ -95,13 +97,15 @@ const logout = (async (req, res) => {
 
     try {
 
-        console.log(req.cookies)
-        res.cookie("token", token, {
-            sameSite: 'None', // or 'Strict' or 'None'
-            secure: true,    // Required if SameSite is 'None'
-            httpOnly: true
+        // console.log(req.cookies)
+        // res.cookie("token", token, {
+        //     sameSite: 'None', // or 'Strict' or 'None'
+        //     secure: true,    // Required if SameSite is 'None'
+        //     httpOnly: true
 
-        })
+        // })
+
+        req.session.destroy
         res.status(200).json({ message: "Cierre de sesión realizado con éxito" })
 
     } catch (error) {
@@ -198,6 +202,8 @@ const verifyToken = async (req, res) => {
 
         if (userFound) {
             console.log(userFound.username)
+
+            console.log("Token VERIFIED")
 
 
             res.status(200).json(userFound)

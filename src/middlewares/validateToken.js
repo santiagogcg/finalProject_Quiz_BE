@@ -8,8 +8,9 @@ const validateToken = ((req, res, next) => {
 
 
 
-    const { token } = req.cookies
-    console.log(req.cookies)
+    // const { token } = req.cookies
+    // console.log(req.cookies)
+    const token = req.session.token
     console.log(token)
     if (!token) { res.status(401).json({ message: "Token no encontrado.Autorización denegada" }); }
 
