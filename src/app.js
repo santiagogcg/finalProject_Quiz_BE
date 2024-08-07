@@ -28,6 +28,9 @@ app.use(session({
     secret: 'prueba',      // Change this to a random string
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI// Update with your mongo URL
+    }),
     cookie: { secure: true } // Set to true if using https
 }));
 
