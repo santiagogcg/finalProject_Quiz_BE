@@ -17,7 +17,8 @@ app.use(cors({
     origin:
         // 'http://localhost:5173',
 
-        "https://finalproject-quiz-fe.onrender.com",
+        // "https://finalproject-quiz-fe.onrender.com",
+        "https://quiz-ra-san.netlify.app",
     credentials: true
 
 }))
