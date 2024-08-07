@@ -28,7 +28,7 @@ app.use(session({
     secret: 'prueba',      // Change this to a random string
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using https
+    cookie: { secure: true } // Set to true if using https
 }));
 
 
