@@ -35,8 +35,19 @@ const login = (async (req, res) => {
         //     httpOnly: false
 
         // })
-        req.session.token = token
+        // req.session.token = token
         // res.json(userFound)
+
+        const user = await userModel.findOneAndUpdate(
+            { username: username },
+            { token: token },
+            { new: true } // Return the updated document
+        );
+
+
+
+        console.log(`Token saved for user ${user.username}: ${user.token}`);
+
         res.json({ token: token, username: userFound.username })
 
 
@@ -57,7 +68,7 @@ const register = (async (req, res) => {
 
 
 
-    const { username, password, quizCompleted, score, statusAnswers, timeSpent } = req.body
+    const { username, password, token, quizCompleted, score, statusAnswers, timeSpent } = req.body
     try {
 
         const passworHashed = await bcrypt.hash(password, 10)
@@ -78,7 +89,7 @@ const register = (async (req, res) => {
         //     httpOnly: true
 
         // })
-        req.session.token = token
+        // req.session.token = token
         res.json(newUser)
 
     } catch (error) {

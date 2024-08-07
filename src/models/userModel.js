@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    token: String,
     quizCompleted: String,
     score: Number,
     statusAnswers: String,
