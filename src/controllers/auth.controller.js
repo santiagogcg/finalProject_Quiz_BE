@@ -36,7 +36,10 @@ const login = (async (req, res) => {
 
         // })
         req.session.token = token
-        res.json(userFound)
+        // res.json(userFound)
+        res.json({ token: token, username: userFound.username })
+
+
 
     } catch (error) {
         console.log(error)
